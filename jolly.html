@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Jolly </title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f8ff;
+      font-family: Arial, sans-serif;
+      flex-direction: column;
+      position: relative;
+    }
+
+    #popup {
+      display: none;
+      position: fixed;
+      top: 60%;
+      left: 50%;
+      height: 100%;
+      width: 80%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      font-size: 24px;
+      color: #ff69b4;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #hamburger {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 24px;
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 100%;
+      height: 4px;
+      background-color: #ff69b4;
+    }
+
+    #clickMeButton {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #ff69b4;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    #close {
+      padding: 10px 40px;
+      font-size: 18px;
+      background-color: #ff69b4;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 60px;
+
+    }
+
+    #timer {
+      margin-top: 20px;
+      font-size: 24px;
+      color: #ff69b4;
+    }
+
+    #loveMessage {
+      display: none;
+      font-size: 36px;
+      color: #ff69b4;
+      animation: fadeIn 2s ease-in-out forwards, pulse 1s infinite;
+      position: relative;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff69b4;
+      transform: rotate(45deg);
+      animation: splash 1s ease-in-out infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff69b4;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: -10px;
+    }
+
+    .heart1 {
+      top: -40px;
+      left: -40px;
+      animation-delay: 0s;
+    }
+
+    .heart2 {
+      top: -40px;
+      right: -40px;
+      animation-delay: 0.2s;
+    }
+
+    .heart3 {
+      bottom: -40px;
+      left: -40px;
+      animation-delay: 0.4s;
+    }
+
+    .heart4 {
+      bottom: -40px;
+      right: -40px;
+      animation-delay: 0.6s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes splash {
+      0% {
+        opacity: 1;
+        transform: scale(1) rotate(45deg);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2) rotate(45deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="hamburger">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <button id="clickMeButton">Click Me</button>
+ 
+  <div id="loveMessage">
+    I love you!
+    <div class="heart heart1"></div>
+    <div class="heart heart2"></div>
+    <div class="heart heart3"></div>
+    <div class="heart heart4"></div>
+  </div>
+  <div id="timer"></div>
+  <div id="popup" style="text-align: center;">
+    <p style="font-style: italic; line-height: 40px;"> When I first met you I <br> didn't think you'd be this <br> important to me. We used <br> to be complete strangers <br> but now you are the person <br> who I can't go one day <br> without talking to  </p>
+
+    <button id="close"> Close Me </button>
+  </div>
+
+  <script>
+    document.getElementById('clickMeButton').addEventListener('click', function() {
+      let timeLeft = 5;
+      const timer = document.getElementById('timer');
+      const loveMessage = document.getElementById('loveMessage');
+
+      timer.textContent = `Wait: ${timeLeft} seconds`;
+
+      const countdown = setInterval(() => {
+        timeLeft--;
+        timer.textContent = `Wait: ${timeLeft} seconds`;
+
+        if (timeLeft <= 0) {
+          clearInterval(countdown);
+          timer.textContent = "JOLLY";
+          loveMessage.style.display = 'block';
+          document.getElementById('clickMeButton').style.display = 'none';
+        }
+      },
+        1000);
+    });
+
+    document
+        .getElementById("hamburger")
+        .addEventListener("click", function () {
+          const popup = document.getElementById("popup");
+          popup.style.display = "block";
+
+        //   setTimeout(() => {
+        //     popup.style.display = "none";
+        //   }, 3000);
+    });
+
+    document
+        .getElementById("close")
+        .addEventListener("click", function () {
+          const popup = document.getElementById("popup");
+          popup.style.display = "none";
+
+        //   setTimeout(() => {
+        //     popup.style.display = "none";
+        //   }, 3000);
+    });
+  </script>
+</body>
+</html>
